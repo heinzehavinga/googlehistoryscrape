@@ -51,14 +51,17 @@ for file in os.listdir("."):
 								destFound = True
 								desturl = str(a.get('href'))
 								parsed = urlparse.urlparse(desturl)
+
 								p =  urlparse.parse_qs(parsed.query)
-								
 								if 'q' in p.keys():
 									desturl = str(p['q'])
-								netloc = parsed.netloc
+									desturl = desturl[2:-2]
+								
+								parsedurl = urlparse.urlparse(desturl) 
+								netloc = parsedurl.netloc
 								writer.writerow([
 			        				search,
-			        				desturl[2:-2],
+			        				desturl,
 			        				netloc,
 			        				datetimeString,
 			        			])
